@@ -215,7 +215,7 @@ module Middleman
       end
 
       def caching_policy
-        @caching_policy ||= Middleman::S3Sync.caching_policy_for(content_type)
+        @caching_policy ||= (Middleman::S3Sync.caching_policy_for_file(original_path) || Middleman::S3Sync.caching_policy_for(content_type))
       end
 
       def caching_policy_match?

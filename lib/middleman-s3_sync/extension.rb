@@ -100,6 +100,10 @@ module Middleman
       def caching_policy(content_type, policy = {})
         ::Middleman::S3Sync.add_caching_policy(content_type, policy)
       end
+
+      def individual_caching_policy(file_name, policy = {})
+        ::Middleman::S3Sync.add_caching_policy(file_name, policy)
+      end
     end
   end
 

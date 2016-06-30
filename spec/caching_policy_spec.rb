@@ -118,3 +118,24 @@ describe "Handling situations where the content type is nil" do
     expect(caching_policy.caching_policy_for("").policies[:max_age]).to eq(60 * 60 * 24 * 365)
   end
 end
+
+describe "Setting a caching policy by filename" do
+  class CachingPolicy
+    include Middleman::S3Sync::CachingPolicy
+  end
+
+  let(:caching_policy) { CachingPolicy.new }
+  let(:policy) { caching_policy.caching_policy_for_file("index.html") }
+
+  it "finds the caching policy by filename" do
+    caching_policy.add_caching_policy('index.html', no_cache: true)
+
+    expect(policy.policies.no_cache).to eq(true)
+  end
+
+  it "returns nil when there is no policy for the given filename" do
+    expect(policy).to be_nil
+  end
+
+
+end

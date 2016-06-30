@@ -224,6 +224,16 @@ default_caching_policy max_age:(60 * 60 * 24 * 365)
 This will apply the policy to any file that do not have a mime-type
 specific policy.
 
+### Setting a policy based on the name of a file
+
+You can set a caching policy for a file by its filename
+
+```ruby
+individual_caching_policy 'build/index.html', max_age: 0, no_cache: true
+```
+
+This will take precedence over any caching policy specified by mime-type
+
 ### Caching Policies
 
 The [Caching Tutorial](http://www.mnot.net/cache_docs/) is a great
