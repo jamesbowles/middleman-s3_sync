@@ -3,13 +3,18 @@ require 'map'
 module Middleman
   module S3Sync
     module CachingPolicy
-      def add_caching_policy(content_type, options)
-        caching_policies[content_type.to_s] = BrowserCachePolicy.new(options)
+      def add_caching_policy(content_type_or_filename, options)
+        caching_policies[content_type_or_filename.to_s] = BrowserCachePolicy.new(options)
       end
 
       def caching_policy_for(content_type)
         return default_caching_policy if content_type.nil? || content_type.empty?
         caching_policies.fetch(content_type.to_s.split(';').first.strip, caching_policies[:default])
+      end
+
+      def caching_policy_for_file(filename)
+        return nil if filename.nil? || filename.empty?
+        caching_policies.fetch(filename, nil)
       end
 
       def default_caching_policy
