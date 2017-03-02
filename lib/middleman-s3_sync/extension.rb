@@ -27,7 +27,7 @@ module Middleman
     option :error_document, nil, 'S3 custom error document path'
     option :content_types, {}, 'Custom content types'
 
-    expose_to_config :s3_sync_options, :default_caching_policy, :caching_policy
+    expose_to_config :s3_sync_options, :default_caching_policy, :caching_policy, :individual_caching_policy
 
     # S3Sync must be the last action in the manipulator chain
     self.resource_list_manipulator_priority = 9999
